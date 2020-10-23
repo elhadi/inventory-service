@@ -12,7 +12,6 @@ public class SimpleController {
 
     @RequestMapping(value = "/campagne", method = RequestMethod.POST)
     public Campaign test(@RequestBody Campaign campagne) {
-        System.out.println("campagne reçue : "+ campagne.getName());
         //campagne.setNom("Tata");
         return campagne;
     }
