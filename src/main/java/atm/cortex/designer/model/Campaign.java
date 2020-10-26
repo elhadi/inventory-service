@@ -2,6 +2,8 @@ package atm.cortex.designer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,15 +13,15 @@ public class Campaign {
     @JsonProperty
     private String name;
 
-    private Date creation_date;
+    private Date creationDate;
 
-    private Date start_date;
+    private Date startDate;
 
-    private Date end_date;
+    private Date endDate;
 
     private String description;
 
-    private Status status_campaign;
+    private Status status;
 
 
     public String getName() {
@@ -31,28 +33,28 @@ public class Campaign {
     }
 
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getDescription() {
@@ -63,19 +65,20 @@ public class Campaign {
         this.description = description;
     }
 
-    public Status getStatus_campaign() {
-        return status_campaign;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatus_campaign(Status status_campaign1) {
-        this.status_campaign = status_campaign1;
+    public void setStatus(Status status_campaign1) {
+        this.status = status_campaign1;
     }
 
-    public boolean dateStatusExpired(Campaign campaign) {
-       boolean check=false;
-        if(campaign.getEnd_date().equals(new Date())== true){
-        setStatus_campaign(Status.EXPIRED);
-        return check=true;}
-        return check;
+    /**
+     * Checks if the campaign has expired
+     * @param campaign
+     * @return
+     */
+    public boolean isExpired() {
+       return this.getEndDate().toInstant().isBefore(Instant.now());
     }
 }
